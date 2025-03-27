@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'Point of Sales',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -321,8 +321,8 @@ return [
             'can' => 'manage-blog',
         ],
         [
-            'text' => 'pages',
-            'url' => 'admin/pages',
+            'text' => 'Manage Category',
+            'url' => '/kategori',
             'icon' => 'far fa-fw fa-file',
             'label' => 4,
             'label_color' => 'success',

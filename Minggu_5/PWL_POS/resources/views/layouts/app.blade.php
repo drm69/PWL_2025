@@ -25,19 +25,15 @@
 
 {{-- Rename section content to content_body --}}
 @section('content')
-    @yield('content_body')
+    <div class="card mb-4">
+        <div class="card-body">
+            @yield('content_body')
+        </div>
+    </div>
 @stop
 
 {{-- Create a common footer --}}
 @section('footer')
-    <div class="float-right">
-        Version: {{ config('app.version', '1.0.0') }}
-    </div>
-    <strong>
-        <a href="{{ config('app.company_url', '#') }}">
-            {{ config('app.company_name', 'My company') }}
-        </a>
-    </strong>
 @stop
 
 {{-- Add common JavaScript/jQuery code --}}
@@ -52,13 +48,22 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.2/css/dataTables.dataTables.css" />
     <style type="text/css">
         {{-- You can add AdminLTE customizations here --}}
-        /*
-        .card-header {
-            border-bottom: none;
+        .dataTables_wrapper {
+            margin-bottom: 50px;
         }
-        .card-title {
-            font-weight: 600;
+        body, html {
+            height: 100%;
         }
-        */
+        .wrapper {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .content-wrapper {
+            flex: 1;
+        }
+        footer {
+            padding-top: 20px;
+        }
     </style>
 @endpush

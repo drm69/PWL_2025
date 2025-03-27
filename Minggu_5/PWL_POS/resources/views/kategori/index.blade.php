@@ -16,6 +16,17 @@
     </div>
 @endsection
 
+@section('footer')
+    <div class="float-right">
+        Version: {{ config('app.version', '1.0.0') }}
+    </div>
+    <strong>
+        <a href="{{route('addKategori')}}">
+            {{ config('app.company_name', 'Add Category') }}
+        </a>
+    </strong>
+@stop
+
 @push('scripts')
     {{ $dataTable->scripts() }}
 @endpush

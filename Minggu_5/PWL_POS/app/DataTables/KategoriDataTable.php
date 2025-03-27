@@ -21,7 +21,31 @@ class KategoriDataTable extends DataTable
     {
         return (new EloquentDataTable($query))
             // ->addColumn('action', 'kategori.action')
-            ->setRowId('id');
+            ->addColumn('action', function ($row) {
+            $editUrl = route('editKategori', $row->kategori_id);
+            $deleteUrl = route('deleteKategori', $row->kategori_id);
+            $csrfToken = csrf_token();
+
+            return '
+                <td class="text-center">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown">
+                            Aksi
+                        </button>
+                        <div class="dropdown-menu">
+                            <a class="dropdown-item" href="'.$editUrl.'">Edit</a>
+                            <form action="'.$deleteUrl.'" method="POST" onsubmit="return confirm(\'Yakin ingin menghapus?\')" class="dropdown-item">
+                                <input type="hidden" name="_token" value="'.$csrfToken.'">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button type="submit" class="btn btn-link text-danger p-0 m-0 border-0">Hapus</button>
+                            </form>
+                        </div>
+                    </div>
+                </td>
+            ';
+        })
+        ->rawColumns(['action'])
+        ->setRowId('kategori_id');
     }
 
     /**
@@ -60,16 +84,15 @@ class KategoriDataTable extends DataTable
     public function getColumns(): array
     {
         return [
-            // Column::computed('action')
-            //     ->exportable(false)
-            //     ->printable(false)
-            //     ->width(60)
-            //     ->addClass('text-center'),
-            Column::make('kategori_id'),
-            Column::make('kategori_kode'),
-            Column::make('kategori_nama'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('kategori_id')->title('ID'),
+            Column::make('kategori_kode')->title('Kode'),
+            Column::make('kategori_nama')->title('Nama'),
+            Column::computed('action')
+                ->exportable(false)
+                ->printable(false)
+                ->width(100)
+                ->addClass('text-center')
+                ->title('Aksi'), // Menambahkan judul kolom
         ];
     }
 
