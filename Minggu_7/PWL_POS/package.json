@@ -9,5 +9,12 @@
         "axios": "^1.6.4",
         "laravel-vite-plugin": "^1.0.0",
         "vite": "^5.0.0"
+    },
+    "dependencies": {
+        "admin-lte": "^4.0.0-beta3",
+        "bootstrap": "^5.3.5",
+        "jquery": "^3.7.1",
+        "jquery-validation": "^1.21.0",
+        "sweetalert2": "^11.19.1"
     }
 }
