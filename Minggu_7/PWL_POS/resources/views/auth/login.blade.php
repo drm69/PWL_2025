@@ -27,7 +27,7 @@
   <div class="card card-outline card-primary">
     <div class="card-header text-center">
       <a href="{{ url('/') }}" class="h1">
-        <b><span style="color: rgb(207, 13, 13);">Bakat</span><span style="color: rgb(41, 41, 236);">.Ku</span></b>
+        <b><span style="color: rgb(207, 13, 13);">Point</span><span>.of.</span><span style="color: rgb(41, 41, 236);">Sales</span></b>
       </a>
     </div>    
     <div class="card-body">
