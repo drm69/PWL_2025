@@ -10,6 +10,12 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
+      <li class="nav-item d-none d-sm-inline-block">
+        <a href="{{ url('logout') }}" class="nav-link text-danger">
+            <i class="fas fa-sign-out-alt"></i> LogOut
+        </a>
+      </li>
+    
     </ul>
 
     <!-- Right navbar links -->
