@@ -2,14 +2,36 @@
 
 @section('content')
 <div class="card card-outline card-primary">
-    <div class="card-header">
-        <h3 class="card-title">{{ $page->title }}</h3>
-        <div class="card-tools">
-            <button onclick="modalAction('{{ url('barang/import') }}')" class="btn btn-info">Import Barang</button>
-            <a href="{{ url('barang/create') }}" class="btn btn-sm btn-primary mt-1">Tambah</a>
-            <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h3 class="card-title mb-0">{{ $page->title }}</h3>
+        
+        <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
+            <!-- Dropdown Export -->
+            <div class="dropdown">
+                <button class="btn btn-warning dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="fa fa-download"></i> Export
+                </button>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="exportDropdown">
+                    <a class="dropdown-item" href="{{ url('/barang/export_pdf') }}">
+                        <i class="fa fa-file-pdf text-danger"></i> Export PDF
+                    </a>
+                    <a class="dropdown-item" href="{{ url('/barang/export_excel') }}">
+                        <i class="fa fa-file-excel text-success"></i> Export Excel
+                    </a>
+                </div>
+            </div>
+    
+            <!-- Tombol Import -->
+            <button onclick="modalAction('{{ url('barang/import') }}')" class="btn btn-success">
+                <i class="fa fa-upload"></i> Import Barang
+            </button>
+    
+            <!-- Tombol Tambah Ajax -->
+            <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-primary">
+                <i class="fa fa-plus"></i> Tambah Ajax
+            </button>
         </div>
-    </div>
+    </div>    
 
     <div class="card-body">
         <!-- Filter kategori -->
