@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\BarangModel;
+use App\Models\KategoriModel;
 use App\Models\PenjualanModel;
 use App\Models\PenjualanDetailModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 
 class TransaksiController extends Controller
@@ -70,4 +74,54 @@ class TransaksiController extends Controller
  
          return view('transaksi.show', ['breadcrumb' => $breadcrumb, 'page' => $page, 'transaksi' => $detail, 'activeMenu' => $activeMenu]);
      }
+
+     public function create_ajax()
+     {
+         $kategori = KategoriModel::select('kategori_id', 'kategori_nama')->get();
+         $barang = BarangModel::select('barang_id', 'barang_nama', 'harga_jual', 'kategori_id')
+             ->with('kategori')
+             ->get();
+     
+         // Generate kode penjualan otomatis
+         $prefix = 'TRX' . date('Ymd'); // Contoh: TRX20250421
+         $lastCode = DB::table('t_penjualan')
+             ->whereDate('created_at', now()->toDateString())
+             ->orderByDesc('penjualan_id')
+             ->first();
+     
+         if ($lastCode) {
+             $lastNumber = (int)substr($lastCode->penjualan_kode, -4);
+             $newNumber = str_pad($lastNumber + 1, 4, '0', STR_PAD_LEFT);
+         } else {
+             $newNumber = '0001';
+         }
+     
+         $penjualan_kode = $prefix . $newNumber;
+     
+         return view('transaksi.create_ajax')
+             ->with('kategori', $kategori)
+             ->with('barang', $barang)
+             ->with('penjualan_kode', $penjualan_kode);
+     }
+
+     public function store(Request $request)
+     {
+         // Simpan data penjualan dan ambil objeknya
+         $penjualan = PenjualanModel::create([
+             'user_id' => Auth::id(),
+             'pembeli' => $request->pembeli,
+             'penjualan_kode' => $request->penjualan_kode,
+             'penjualan_tanggal' => now(),
+         ]);
+     
+         // Simpan detail penjualan menggunakan ID dari penjualan yang baru dibuat
+         PenjualanDetailModel::create([
+             'penjualan_id' => $penjualan->penjualan_id,
+             'barang_id' => $request->barang_id,
+             'harga' => $request->harga,
+             'jumlah' => $request->jumlah,
+         ]);
+     
+         return redirect('/transaksi')->with('success', 'Data transaksi berhasil disimpan');
+     }     
 }

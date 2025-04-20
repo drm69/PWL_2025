@@ -91,7 +91,7 @@
         </tr>
     </table>
 
-    <h3 class="text-center">LAPORAN DATA BARANG</h3>
+    <h3 class="text-center">LAPORAN DATA TRANSAKSI</h3>
 
     <table class="border-all">
         <thead>

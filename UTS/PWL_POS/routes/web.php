@@ -11,6 +11,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SupplierController;
 use App\Http\Controllers\TransaksiController;
+use App\Models\BarangModel;
 use PHPUnit\Framework\Attributes\Group;
 
 Route::pattern('id', '[0-9]+'); // artinya ketika ada parameter {id}, maka harus berupa angka
@@ -139,7 +140,24 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::get('/', [TransaksiController::class, 'index']);
             Route::post('/list', [TransaksiController::class, 'list']);
             Route::get('/{id}', [TransaksiController::class, 'show']);
-
+            Route::get('/export_excel', [BarangController::class, 'export_excel']);
+            Route::get('/export_pdf', [BarangController::class, 'export_pdf']);
+            Route::get('/create_ajax', [TransaksiController::class, 'create_ajax'])->name('create');
+            Route::post('/ajax', [TransaksiController::class, 'store'])->name('save');
+    
+            // Mendapatkan barang berdasarkan kategori
+            Route::get('/get-barang-by-kategori/{kategori_id}', function($kategori_id) {
+                $barang = BarangModel::where('kategori_id', $kategori_id)
+                    ->select('barang_id', 'barang_nama', 'harga_jual')
+                    ->get();
+                return response()->json(['status' => true, 'barang' => $barang]);
+            });
+            
+            // Mendapatkan harga barang berdasarkan ID barang
+            Route::get('/get-harga-barang/{barang_id}', function($barang_id) {
+                $barang = BarangModel::find($barang_id);
+                return response()->json(['status' => true, 'harga' => $barang->harga_jual]);
+            });
         });
-    });
+    });    
 });

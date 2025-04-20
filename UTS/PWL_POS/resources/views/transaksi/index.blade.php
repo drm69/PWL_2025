@@ -23,7 +23,7 @@
                 <i class="fa fa-upload"></i> Import Barang
             </button>
 
-            <button onclick="modalAction('{{ url('transaksi/create_ajax') }}')" class="btn btn-primary">
+            <button onclick="modalAction('{{ route('create') }}')" class="btn btn-primary">
                 <i class="fa fa-plus"></i> Tambah Transaksi
             </button>
         </div>
