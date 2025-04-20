@@ -10,6 +10,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SupplierController;
+use App\Http\Controllers\TransaksiController;
 use PHPUnit\Framework\Attributes\Group;
 
 Route::pattern('id', '[0-9]+'); // artinya ketika ada parameter {id}, maka harus berupa angka
@@ -131,5 +132,14 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
     Route::group(['prefix' => 'profile'], function () {
         Route::get('/', [ProfileController::class, 'index']);
         Route::put('/update', [ProfileController::class, 'update']);
+    });
+
+    Route::group(['prefix' => 'transaksi'], function () {
+        Route::middleware(['authorize:ADM,MNG,STF'])->Group(function() {
+            Route::get('/', [TransaksiController::class, 'index']);
+            Route::post('/list', [TransaksiController::class, 'list']);
+            Route::get('/{id}', [TransaksiController::class, 'show']);
+
+        });
     });
 });
