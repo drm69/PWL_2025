@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LevelController;
 use App\Http\Controllers\BarangController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StokController;
 use App\Http\Controllers\SupplierController;
 use PHPUnit\Framework\Attributes\Group;
@@ -125,5 +126,10 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::get('/create', [StokController::class, 'create']);
             Route::post('/', [StokController::class, 'store']);
         });
+    });
+    
+    Route::group(['prefix' => 'profile'], function () {
+        Route::get('/', [ProfileController::class, 'index']);
+        Route::put('/update', [ProfileController::class, 'update']);
     });
 });
