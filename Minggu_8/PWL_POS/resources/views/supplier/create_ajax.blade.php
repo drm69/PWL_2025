@@ -10,17 +10,17 @@
             </div>
             <div class="modal-body">
                 <div class="form-group">
-                    <label>Supplier Kode</label>
+                    <label>Kode Supplier</label>
                     <input value="" type="text" name="supplier_kode" id="supplier_kode" class="form-control" required>
                     <small id="error-supplier-kode" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Supplier Nama</label>
+                    <label>Nama Supplier</label>
                     <input value="" type="text" name="supplier_nama" id="supplier_nama" class="form-control" required>
                     <small id="error-supplier-nama" class="error-text form-text text-danger"></small>
                 </div>
                 <div class="form-group">
-                    <label>Supplier Alamat</label>
+                    <label>Alamat Supplier</label>
                     <input value="" type="text" name="supplier_alamat" id="supplier_alamat" class="form-control"
                         required>
                     <small id="error-supplier-alamat" class="error-text form-text text-danger"></small>

@@ -22,6 +22,7 @@
                     <th>ID</th>
                     <th>Kode Supplier</th>
                     <th>Nama Supplier</th>
+                    <th>Alamat</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -64,6 +65,11 @@ function modalAction(url = '') {
                 searchable: true
             },{
                 data: "supplier_nama",
+                className: "",
+                orderable: true,
+                searchable: true
+            },{
+                data: "supplier_alamat",
                 className: "",
                 orderable: true,
                 searchable: true
