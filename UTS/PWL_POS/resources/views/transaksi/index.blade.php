@@ -2,49 +2,30 @@
 
 @section('content')
 <div class="card card-outline card-primary">
-    <div class="card-header d-flex justify-content-between align-items-center">
-        <h3 class="card-title mb-0">{{ $page->title }}</h3>
-        <div class="d-flex justify-content-end align-items-center" style="gap: 10px;">
-            <div class="dropdown">
-                <button class="btn btn-warning dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fa fa-download"></i> Export
-                </button>
-                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="exportDropdown">
-                    <a class="dropdown-item" href="{{ url('transaksi/export_pdf') }}">
-                        <i class="fa fa-file-pdf text-danger"></i> Export PDF
-                    </a>
-                    <a class="dropdown-item" href="{{ url('transaksi/export_excel') }}">
-                        <i class="fa fa-file-excel text-success"></i> Export Excel
-                    </a>
-                </div>
-            </div>
-
-            <button onclick="modalAction('{{ url('transaksi/import') }}')" class="btn btn-success">
-                <i class="fa fa-upload"></i> Import Barang
-            </button>
-
-            <button onclick="modalAction('{{ route('create') }}')" class="btn btn-primary">
-                <i class="fa fa-plus"></i> Tambah Transaksi
-            </button>
-        </div>
-    </div>
-
-    <div class="card-body">
-        <div id="filter" class="form-horizontal filter-date p-2 border-bottom mb-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group form-group-sm row text-sm mb-0">
-                        <label class="col-md-1 col-form-label">Filter</label>
-                        <div class="col-md-3">
-                            <select name="filter_kategori" class="form-control form-control-sm filter_penjualan_detail">
-                                <option value="">- Semua -</option>
-                            </select>
-                            <small class="form-text text-muted">Kategori Barang</small>
-                        </div>
+    <div class="card-header">
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <h3 class="card-title mb-0">{{ $page->title }}</h3>
+            <div class="d-flex align-items-center mt-2 mt-md-0" style="gap: 10px;">
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-download"></i> Export
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="exportDropdown">
+                        <a class="dropdown-item" href="{{ url('transaksi/export_pdf') }}">
+                            <i class="fa fa-file-pdf text-danger"></i> Export PDF
+                        </a>
+                        <a class="dropdown-item" href="{{ url('transaksi/export_excel') }}">
+                            <i class="fa fa-file-excel text-success"></i> Export Excel
+                        </a>
                     </div>
                 </div>
+                <button onclick="modalAction('{{ route('create') }}')" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Tambah Transaksi
+                </button>
             </div>
         </div>
+    </div>
+</div>
 
         @if (session('success'))
             <div class="alert alert-success">{{ session('success') }}</div>
@@ -61,7 +42,6 @@
                     <th>Kasir</th>
                     <th>Pembeli</th>
                     <th>Tanggal</th>
-                    <th>Harga</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -119,26 +99,16 @@ $(document).ready(function () {
             { data: "user_nama" },
             { data: "pembeli" },
             { data: "penjualan_tanggal" },
-            {
-                data: "harga_total",
-                className: "text-right",
-                render: function (data) {
-                    return new Intl.NumberFormat('id-ID').format(data);
-                }
-            },
             { data: "aksi", className: "text-center", orderable: false, searchable: false }
         ]
     });
 
-
-    $('.filter_penjualan_detail').change(function () {
-        dataTransaksi.draw();
-    });
-
-    $('#table_penjualan_detail_filter input').unbind().bind().on('keyup', function (e) {
-        if (e.keyCode === 13) {
+    let searchDelay;
+    $('#table_penjualan_detail_filter input').unbind().on('input', function () {
+        clearTimeout(searchDelay);
+        searchDelay = setTimeout(() => {
             dataTransaksi.search(this.value).draw();
-        }
+        }, 300); // delay 300ms biar gak spam request
     });
 });
 </script>

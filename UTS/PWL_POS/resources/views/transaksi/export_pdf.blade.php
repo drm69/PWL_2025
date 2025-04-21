@@ -96,24 +96,28 @@
     <table class="border-all">
         <thead>
             <tr>
-                <th class="text-center">No</th>
-                <th>Kode Barang</th>
-                <th>Nama Barang</th>
-                <th class="text-right">Harga Beli</th>
-                <th class="text-right">Harga Jual</th>
-                <th>Kategori</th>
+                <th>No</th>
+                <th>Kode Transaksi</th>
+                <th>Kasir</th>
+                <th>Pembeli</th>
+                <th>Tanggal</th>
+                <th>Harga</th>
+                <th>Jumlah</th>
+                <th>Total</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($barang as $b)
-            <tr>
-                <td class="text-center">{{ $loop->iteration }}</td>
-                <td>{{ $b->barang_kode }}</td>
-                <td>{{ $b->barang_nama }}</td>
-                <td class="text-right">{{ number_format($b->harga_beli, 0, ',', '.') }}</td>
-                <td class="text-right">{{ number_format($b->harga_jual, 0, ',', '.') }}</td>
-                <td>{{ $b->kategori->kategori_nama }}</td>
-            </tr>
+            @foreach ($transaksi as $index => $t)
+                <tr>
+                    <td class="text-center">{{ $index + 1 }}</td>
+                    <td>{{ $t->penjualan->penjualan_kode ?? '-' }}</td>
+                    <td>{{ $t->penjualan->user->nama ?? '-' }}</td>
+                    <td>{{ $t->penjualan->pembeli ?? '-' }}</td>
+                    <td>{{ $t->penjualan->penjualan_tanggal ?? '-' }}</td>
+                    <td class="text-right">Rp {{ number_format($t->harga, 0, ',', '.') }}</td>
+                    <td class="text-center">{{ $t->jumlah }}</td>
+                    <td class="text-right">Rp {{ number_format($t->harga * $t->jumlah, 0, ',', '.') }}</td>
+                </tr>
             @endforeach
         </tbody>
     </table>

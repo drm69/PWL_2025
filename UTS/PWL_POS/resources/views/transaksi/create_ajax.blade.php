@@ -1,9 +1,9 @@
-<form action="{{ route('save') }}" method="POST" id="form-tambah">
+<form action="{{ url('transaksi/ajax') }}" method="POST" id="form-tambah">
     @csrf
     <div id="modal-master" class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Transaksi</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Transaksi</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
                         aria-hidden="true">&times;</span></button>
             </div>
@@ -56,7 +56,6 @@
         </div>
     </div>
 </form>
-
 <script>
     $(document).ready(function() {
         // Ketika kategori dipilih

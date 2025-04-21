@@ -140,10 +140,12 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::get('/', [TransaksiController::class, 'index']);
             Route::post('/list', [TransaksiController::class, 'list']);
             Route::get('/{id}', [TransaksiController::class, 'show']);
-            Route::get('/export_excel', [BarangController::class, 'export_excel']);
-            Route::get('/export_pdf', [BarangController::class, 'export_pdf']);
+            Route::get('/export_excel', [TransaksiController::class, 'export_excel']);
+            Route::get('/export_pdf', [TransaksiController::class, 'export_pdf']);
             Route::get('/create_ajax', [TransaksiController::class, 'create_ajax'])->name('create');
-            Route::post('/ajax', [TransaksiController::class, 'store'])->name('save');
+            Route::post('/ajax', [TransaksiController::class, 'store']);
+            Route::get('/{id}/confirm_ajax', [TransaksiController::class, 'confirm_ajax']); // menampilkan halaman form Delete user Ajax
+            Route::delete('/{id}/delete_ajax', [TransaksiController::class, 'delete_ajax']);
     
             // Mendapatkan barang berdasarkan kategori
             Route::get('/get-barang-by-kategori/{kategori_id}', function($kategori_id) {

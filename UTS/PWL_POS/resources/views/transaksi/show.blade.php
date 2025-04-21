@@ -28,12 +28,16 @@
                         <td>{{ $transaksi->barang->barang_nama }}</td>
                     </tr>
                     <tr>
-                        <th>Harga</th>
-                        <td>{{ number_format($transaksi->barang->harga, 0, ',', '.') }}</td>
+                        <th>Harga per Unit</th>
+                        <td>{{ number_format($transaksi->harga, 0, ',', '.') }}</td>
                     </tr>
                     <tr>
                         <th>Jumlah</th>
                         <td>{{ $transaksi->jumlah }}</td>
+                    </tr>
+                    <tr>
+                        <th>Harga Total</th>
+                        <td>{{ number_format($transaksi->harga * $transaksi->jumlah, 0, ',', '.') }}</td>
                     </tr>
                 </table>
             @endempty
