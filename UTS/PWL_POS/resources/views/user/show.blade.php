@@ -34,6 +34,14 @@
                     <th>Password</th>
                     <td>********</td>
                 </tr>
+                <tr>
+                    <th>Created At</th>
+                    <td>{{ $user->created_at }}</td>
+                </tr>
+                <tr>
+                    <th>Updated At</th>
+                    <td>{{ $user->updated_at }}</td>
+                </tr>
             </table>
         @endempty
         <a href="{{ url('user') }}" class="btn btn-sm btn-default mt-2">Kembali</a>

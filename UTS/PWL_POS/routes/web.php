@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::get('/{id}/edit', [UserController::class, 'edit']); // menampilkan halaman form edit user
             Route::put('/{id}', [UserController::class, 'update']); // menyimpan perubahan data user
             Route::delete('/{id}', [UserController::class, 'destroy']); // menghapus data user
+            Route::get('/export_excel', [UserController::class, 'export_excel']);
+            Route::get('/export_pdf', [UserController::class, 'export_pdf']);
         });
     });
     
@@ -78,6 +80,10 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
             Route::get('/{id}/edit', [KategoriController::class, 'edit']);
             Route::put("/{id}", [KategoriController::class, 'update']);
             Route::delete('/{id}', [KategoriController::class, 'destroy']);
+            Route::get('/export_pdf', [KategoriController::class, 'export_pdf']);
+            Route::get('/import', [KategoriController::class, 'import']);
+            Route::post('/import_ajax', [KategoriController::class, 'import_ajax']);
+            Route::get('/export_excel', [KategoriController::class, 'export_excel']);
         });
     });
     
@@ -91,11 +97,15 @@ Route::middleware(['auth'])->group(function() { // artinya semua route di dalam 
         Route::delete('/{id}/delete_ajax', [SupplierController::class, 'delete_ajax']); // menghapus data user Ajax
         Route::post('/list', [SupplierController::class, 'list']);
         Route::get('/create', [SupplierController::class, 'create']);
-        Route::post('/', [SupplierController::class, 'store']);
+        Route::post('/store', [SupplierController::class, 'store']);
         Route::get('/{id}', [SupplierController::class, 'show']);
         Route::get('/{id}/edit', [SupplierController::class, 'edit']);
         Route::put("/{id}", [SupplierController::class, 'update']);
         Route::delete('/{id}', [SupplierController::class, 'destroy']);
+        Route::get('/export_excel', [SupplierController::class, 'export_excel']);
+        Route::get('/export_pdf', [SupplierController::class, 'export_pdf']);
+        Route::get('/import', [SupplierController::class, 'import']);
+        Route::post('/import_ajax', [SupplierController::class, 'import_ajax']);
     });
 
     Route::group(['prefix' => 'barang'], function () {

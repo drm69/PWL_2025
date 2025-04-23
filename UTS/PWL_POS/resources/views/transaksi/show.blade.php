@@ -39,6 +39,14 @@
                         <th>Harga Total</th>
                         <td>{{ number_format($transaksi->harga * $transaksi->jumlah, 0, ',', '.') }}</td>
                     </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td>{{ $transaksi->created_at }}</td>
+                    </tr>
+                    <tr>
+                        <th>Updated At</th>
+                        <td>{{ $transaksi->updated_at }}</td>
+                    </tr>
                 </table>
             @endempty
 

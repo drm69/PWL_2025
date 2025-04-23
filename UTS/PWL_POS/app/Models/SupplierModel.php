@@ -16,7 +16,8 @@ class SupplierModel extends Model
     protected $fillable = [
         'supplier_kode',
         'supplier_nama',
-        'supplier_alamat'
+        'supplier_alamat',
+        'no_telepon'
     ];
 
     public function stok(): HasMany {

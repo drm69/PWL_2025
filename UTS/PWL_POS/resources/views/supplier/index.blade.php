@@ -3,10 +3,34 @@
 @section('content')
 <div class="card card-outline card-primary">
     <div class="card-header">
-        <h3 class="card-title">{{ $page->title }}</h3>
-        <div class="card-tools">
-            <a class="btn btn-sm btn-primary mt-1" href="{{ url('supplier/create') }}">Tambah</a>
-            <button onclick="modalAction('{{url ('supplier/create_ajax')}}')" class="btn btn-sm btn-success mt-1">Tambah Ajax</button>
+        <div class="d-flex justify-content-between align-items-center flex-wrap">
+            <h3 class="card-title mb-0">{{ $page->title }}</h3>
+            <div class="d-flex align-items-center mt-2 mt-md-0" style="gap: 10px;">
+                <!-- Dropdown Export -->
+                <div class="dropdown">
+                    <button class="btn btn-warning dropdown-toggle" type="button" id="exportDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-download"></i> Export
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="exportDropdown">
+                        <a class="dropdown-item" href="{{ url('/supplier/export_pdf') }}">
+                            <i class="fa fa-file-pdf text-danger"></i> Export PDF
+                        </a>
+                        <a class="dropdown-item" href="{{ url('/supplier/export_excel') }}">
+                            <i class="fa fa-file-excel text-success"></i> Export Excel
+                        </a>
+                    </div>
+                </div>
+        
+                <!-- Tombol Import -->
+                <button onclick="modalAction('{{ url('supplier/import') }}')" class="btn btn-success">
+                    <i class="fa fa-upload"></i> Import
+                </button>
+        
+                <!-- Tombol Tambah Ajax -->
+                <button onclick="modalAction('{{ url('supplier/create') }}')" class="btn btn-primary">
+                    <i class="fa fa-plus"></i> Tambah Supplier
+                </button>
+            </div>
         </div>
     </div>
     <div class="card-body">
@@ -23,6 +47,7 @@
                     <th>Kode Supplier</th>
                     <th>Nama Supplier</th>
                     <th>Alamat</th>
+                    <th>No Telepon</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -73,6 +98,11 @@ function modalAction(url = '') {
                 className: "",
                 orderable: true,
                 searchable: true
+            },{
+                data: "no_telepon",
+                className: "",
+                orderable: false,
+                searchable: false
             },{
                 data: "aksi",
                 className: "",

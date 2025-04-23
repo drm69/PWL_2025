@@ -85,7 +85,7 @@ class TransaksiController extends Controller
              ->get();
      
          // Generate kode penjualan otomatis
-         $prefix = 'TRX' . date('Ymd'); // Contoh: TRX20250421
+         $prefix = 'TRX' . date('Ymd');
          $lastCode = DB::table('t_penjualan')
              ->whereDate('created_at', now()->toDateString())
              ->orderByDesc('penjualan_id')

@@ -27,6 +27,13 @@
                 <td>{{ $level->level_nama }}</td>
             </tr>
             <tr>
+                <th>Created At</th>
+                <td>{{ $level->created_at }}</td>
+            </tr>
+            <tr>
+                <th>Updated At</th>
+                <td>{{ $level->updated_at }}</td>
+            </tr>
         </table>
     @endempty
     <a href="{{ url('level') }}" class="btn btn-sm btn-default mt-2">Kembali</a>

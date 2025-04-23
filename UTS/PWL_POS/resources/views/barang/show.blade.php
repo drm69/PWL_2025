@@ -39,6 +39,14 @@
                         <th>Harga Jual</th>
                         <td>{{ number_format($barang->harga_jual, 0, ',', '.') }}</td>
                     </tr>
+                    <tr>
+                        <th>Created At</th>
+                        <td>{{ $barang->created_at }}</td>
+                    </tr>
+                    <tr>
+                        <th>Updated At</th>
+                        <td>{{ $barang->updated_at }}</td>
+                    </tr>
                 </table>
             @endempty
 

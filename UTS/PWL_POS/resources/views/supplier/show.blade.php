@@ -30,6 +30,18 @@
                     <th>Alamat Supplier</th>
                     <td>{{ $supplier->supplier_alamat }}</td>
                 </tr>
+                <tr>
+                    <th>No Telepon</th>
+                    <td>{{ $supplier->no_telepon }}</td>
+                </tr>
+                <tr>
+                    <th>Created At</th>
+                    <td>{{ $supplier->created_at }}</td>
+                </tr>
+                <tr>
+                    <th>Updated At</th>
+                    <td>{{ $supplier->updated_at }}</td>
+                </tr>
             </table>
         @endempty
         <a href="{{ url('supplier') }}" class="btn btn-sm btn-default mt-2">Kembali</a>

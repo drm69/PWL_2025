@@ -47,6 +47,12 @@
                              id="supplier_alamat" class="form-control" required>
                          <small id="error-supplier-alamat" class="error-text form-text text-danger"></small>
                      </div>
+                     <div class="form-group">
+                         <label>No Supplier</label>
+                         <input value="{{ $supplier->no_telepon }}" type="text" name="no_telepon"
+                             id="no_telepon" class="form-control" required>
+                         <small id="error-supplier-alamat" class="error-text form-text text-danger"></small>
+                     </div>
                  <div class="modal-footer">
                      <button type="button" data-dismiss="modal" class="btn btn-warning">Batal</button>
                      <button type="submit" class="btn btn-primary">Simpan</button>
@@ -58,10 +64,9 @@
          $(document).ready(function () {
              $("#form-edit").validate({
                  rules: {
-                     supplier_kode: { required: true, minlength: 4, maxlength: 10 },
                      supplier_nama: { required: true, maxlength: 100 },
                      supplier_alamat: { required: true },
-                     supplier_telepon: { required: true, digits: true, minlength: 10, maxlength: 15 }
+                     no_telepon: { required: true, digits: true, minlength: 10, maxlength: 15 }
                  },
                  submitHandler: function (form) {
                      $.ajax({

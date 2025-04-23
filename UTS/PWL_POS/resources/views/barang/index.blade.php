@@ -1,5 +1,4 @@
 @extends('layouts.template')
-
 @section('content')
     <div class="card card-outline card-primary">
         <div class="card-header">
@@ -28,33 +27,29 @@
             
                     <!-- Tombol Tambah Ajax -->
                     <button onclick="modalAction('{{ url('barang/create_ajax') }}')" class="btn btn-primary">
-                        <i class="fa fa-plus"></i> Tambah Ajax
+                        <i class="fa fa-plus"></i> Tambah Barang
                     </button>
                 </div>
             </div>
         </div>
-    </div>
 
     <div class="card-body">
-        <!-- Filter kategori -->
-        <div id="filter" class="form-horizontal filter-date p-2 border-bottom mb-3">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="form-group form-group-sm row text-sm mb-0">
-                        <label class="col-md-1 col-form-label">Filter</label>
-                        <div class="col-md-3">
-                            <select name="filter_kategori" class="form-control form-control-sm filter_kategori">
-                                <option value="">- Semua -</option>
-                                @foreach($kategori as $l)
-                                    <option value="{{ $l->kategori_id }}">{{ $l->kategori_nama }}</option>
-                                @endforeach
-                            </select>
-                            <small class="form-text text-muted">Kategori Barang</small>
-                        </div>
-                    </div>
+        <div class="row">
+            <div class="col-md-12">
+              <div class="form-group row">
+                <label class="col-1 control-label col-form-label">Filter:</label>
+                <div class="col-3">
+                  <select class="form-control" id="kategori_id" name="kategori_id" required>
+                    <option value="">- Semua -</option>
+                    @foreach($kategori as $item)
+                      <option value="{{ $item->kategori_id }}">{{ $item->kategori_nama }}</option>
+                    @endforeach
+                  </select>
+                  <small class="form-text text-muted">Kategori Barang</small>
                 </div>
+              </div>
             </div>
-        </div>
+          </div>
 
         <!-- Notifikasi -->
         @if (session('success'))
@@ -106,7 +101,7 @@
                 type: "POST",
                 dataType: "json",
                 data: function (d) {
-                    d.filter_kategori = $('.filter_kategori').val();
+                    d.kategori_id = $('#kategori_id').val();
                 }
             },
             columns: [
@@ -159,7 +154,7 @@
         });
 
         // Filter kategori berubah -> reload tabel
-        $('.filter_kategori').change(function () {
+        $('#kategori_id').change(function () {
             dataBarang.draw();
         });
 

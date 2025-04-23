@@ -19,7 +19,7 @@
       </li>
       <li class="nav-header">Data Pengguna</li>
       <li class="nav-item">
-        <a href="{{ url('/profile') }}" class="nav-link {{ ($activeMenu == 'level') ? 'active' : '' }}">
+        <a href="{{ url('/profile') }}" class="nav-link {{ ($activeMenu == 'profile') ? 'active' : '' }}">
           <i class="nav-icon fas fa-id-badge"></i>
           <p>Profile</p>
         </a>
